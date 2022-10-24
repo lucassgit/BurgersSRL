@@ -23,7 +23,6 @@ class Carrito extends Model
                   idcarrito
                   fk_idcliente
                   fk_idproducto
-
                 FROM carritos ORDER BY nombre ASC";
         $lstRetorno = DB::select($sql);
         return $lstRetorno;
@@ -35,7 +34,6 @@ class Carrito extends Model
                 idcarrito
                 fk_idcliente
                 fk_idproducto
-
                 FROM carritos WHERE idcarrito = $idcarrito";
         $lstRetorno = DB::select($sql);
 

@@ -5,14 +5,14 @@ namespace App\Entidades;
 use DB;
 use Illuminate\Database\Eloquent\Model;
 
-class Cliente extends Model
+class Sucursal extends Model
 {
 
-    protected $table = 'Clientes';
+    protected $table = 'sucursales';
     public $timestamps = false;
 
     protected $fillable = [ //Campos en la tabla clientes de la BDD...
-        'idcliente', 'nombre', 'apellido', 'correo', 'dni', 'celular', 'clave',
+        'idsucursal', 'telefono', 'direccion', 'linkmapa',
     ];
 
     protected $hidden = [];
@@ -20,80 +20,31 @@ class Cliente extends Model
     public function obtenerTodos()
     {
         $sql = "SELECT
-                  nombre,
-                  apellido,
-                  correo,
-                  dni,
-                  celular,
-                  clave
-                FROM clientes ORDER BY nombre ASC";
+                  telefono
+                  direccion
+                  linkmapa
+                FROM sucursales ORDER BY nombre ASC";
         $lstRetorno = DB::select($sql);
         return $lstRetorno;
     }
 
-    public function obtenerPorId($idcliente)
+    public function obtenerPorId($idsucursal)
     {
         $sql = "SELECT
-                nombre,
-                apellido,
-                correo,
-                dni,
-                celular,
-                clave
-                FROM clientes WHERE idcliente = $idcliente";
+                  telefono
+                  direccion
+                  linkmapa
+                FROM sucursales WHERE idsucursal = $idsucursal";
         $lstRetorno = DB::select($sql);
 
         if (count($lstRetorno) > 0) {
-            $this->idcliente = $lstRetorno[0]->idcliente;
-            $this->nombre = $lstRetorno[0]->nombre;
-            $this->apellido = $lstRetorno[0]->apellido;
-            $this->correo = $lstRetorno[0]->correo;
-            $this->dni = $lstRetorno[0]->dni;
-            $this->celular = $lstRetorno[0]->celular;
-            $this->clave = $lstRetorno[0]->clave;
+            $this->idsucursal = $lstRetorno[0]->idsucursal;
+            $this->telefono = $lstRetorno[0]->telefono;
+            $this->direccion = $lstRetorno[0]->direccion;
+            $this->linkmapa = $lstRetorno[0]->linkmapa;
             return $this;
         }
         return null;
     }
 
-    public function guardar()
-    {
-        $sql = "UPDATE clientes SET
-            nombre='$this->nombre',
-            apellido='$this->apellido',
-            correo='$this->correo',
-            dni='$this->dni',
-            celular='$this->celular',
-            clave='$this->clave'
-            WHERE idcliente=?";
-        $affected = DB::update($sql, [$this->idcliente]);
-    }
-
-    public function eliminar()
-    {
-        $sql = "DELETE FROM clientes WHERE
-            idcliente=?";
-        $affected = DB::delete($sql, [$this->idcliente]);
-    }
-
-    public function insertar()
-    {
-        $sql = "INSERT INTO clientes (
-                nombre,
-                apellido,
-                correo,
-                dni,
-                celular,
-                clave
-            ) VALUES (?, ?, ?, ?, ?, ?);";
-        $result = DB::insert($sql, [
-            $this->nombre,
-            $this->apellido,
-            $this->correo,
-            $this->dni,
-            $this->celular,
-            $this->clave,
-        ]);
-        return $this->idcliente = DB::getPdo()->lastInsertId();
-    }
 }

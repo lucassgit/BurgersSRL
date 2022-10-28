@@ -20,6 +20,7 @@ class Categoria extends Model
     public function obtenerTodos()
     {
         $sql = "SELECT
+                  idcategoria
                   nombre
                 FROM categorias ORDER BY nombre ASC";
         $lstRetorno = DB::select($sql);
@@ -29,6 +30,7 @@ class Categoria extends Model
     public function obtenerPorId($idcategoria)
     {
         $sql = "SELECT
+                  idcategoria
                   nombre
                 FROM categorias WHERE idcategoria = $idcategoria";
         $lstRetorno = DB::select($sql);
@@ -41,4 +43,31 @@ class Categoria extends Model
         return null;
     }
 
+    public function guardar()
+    {
+        $sql = "UPDATE categorias SET
+            nombre='$this->nombre'
+            WHERE idcategoria=?";
+        $affected = DB::update($sql, [$this->idcategoria]);
+    }
+
+    public function eliminar()
+    {
+        $sql = "DELETE FROM categorias WHERE
+            idcategoria=?";
+        $affected = DB::delete($sql, [$this->idcategoria]);
+    }
+
+    public function insertar()
+    {
+        $sql = "INSERT INTO categorias (
+                idcategoria,
+                nombre
+            ) VALUES (?, ?);";
+        $result = DB::insert($sql, [
+            $this->idcategoria,
+            $this->nombre,
+        ]);
+        return $this->idcategoria = DB::getPdo()->lastInsertId();
+    }
 }

@@ -20,6 +20,7 @@ class Estado extends Model
     public function obtenerTodos()
     {
         $sql = "SELECT
+                  idestado
                   nombre
                 FROM estados ORDER BY nombre ASC";
         $lstRetorno = DB::select($sql);
@@ -29,6 +30,7 @@ class Estado extends Model
     public function obtenerPorId($idestado)
     {
         $sql = "SELECT
+                idestado
                 nombre
                 FROM estados WHERE idestado = $idestado";
         $lstRetorno = DB::select($sql);
@@ -41,4 +43,33 @@ class Estado extends Model
         return null;
     }
 
+
+    public function guardar()
+    {
+        $sql = "UPDATE estados SET
+            idestado='$this->idestado',
+            nombre='$this->nombre',
+            WHERE idestado=?";
+        $affected = DB::update($sql, [$this->idestado]);
+    }
+
+    public function eliminar()
+    {
+        $sql = "DELETE FROM estados WHERE
+            idestado=?";
+        $affected = DB::delete($sql, [$this->idestado]);
+    }
+
+    public function insertar()
+    {
+        $sql = "INSERT INTO estados (
+                idestado,
+                nombre
+            ) VALUES (?, ?);";
+        $result = DB::insert($sql, [
+            $this->idestado,
+            $this->nombre,
+        ]);
+        return $this->idestado = DB::getPdo()->lastInsertId();
+    }
 }

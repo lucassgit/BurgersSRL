@@ -57,7 +57,7 @@ class Producto extends Model
 
       public function guardar()
       {
-            $sql = "UPDATE postulaciones SET
+            $sql = "UPDATE productos SET
             nombre='$this->nombre',
             cantidad='$this->cantidad',
             precio='$this->precio',

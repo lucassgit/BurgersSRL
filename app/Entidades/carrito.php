@@ -50,7 +50,7 @@ class Carrito extends Model
     {
         $sql = "UPDATE carritos SET
             fk_idcliente='$this->fk_idcliente',
-            fk_idproducto='$this->fk_idproducto',
+            fk_idproducto='$this->fk_idproducto'
             WHERE idcarrito=?";
         $affected = DB::update($sql, [$this->idcarrito]);
     }
@@ -66,7 +66,7 @@ class Carrito extends Model
     {
         $sql = "INSERT INTO carritos (
                 fk_idcliente,
-                fk_idproducto,
+                fk_idproducto
             ) VALUES (?, ?);";
         $result = DB::insert($sql, [
             $this->fk_idcliente,

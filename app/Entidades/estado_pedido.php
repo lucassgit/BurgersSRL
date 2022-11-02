@@ -56,7 +56,7 @@ class Estado_pedido extends Model
             fk_idpedido='$this->fk_idpedido',
             fk_idcliente='$this->fk_idcliente',
             fk_idestado='$this->fk_idestado',
-            fecha='$this->fecha',
+            fecha='$this->fecha'
             WHERE idestado_pedido=?";
         $affected = DB::update($sql, [$this->idestado_pedido]);
     }
@@ -74,7 +74,7 @@ class Estado_pedido extends Model
                 fk_idpedido,
                 fk_idcliente,
                 fk_idestado,
-                fecha,
+                fecha
             ) VALUES (?, ?, ?, ?);";
         $result = DB::insert($sql, [
             $this->fk_idpedido,

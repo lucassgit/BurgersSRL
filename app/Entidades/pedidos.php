@@ -79,11 +79,11 @@ class Pedido extends Model
     public function insertar()
     {
         $sql = "INSERT INTO pedidos (
-                fecha
-                descripcion
-                total
-                fk_idsucursal
-                fk_idcliente
+                fecha,
+                descripcion,
+                total,
+                fk_idsucursal,
+                fk_idcliente,
                 fk_idestado
             ) VALUES (?, ?, ?, ?, ?, ?);";
         $result = DB::insert($sql, [

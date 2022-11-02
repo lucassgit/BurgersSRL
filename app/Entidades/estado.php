@@ -48,7 +48,7 @@ class Estado extends Model
     {
         $sql = "UPDATE estados SET
             idestado='$this->idestado',
-            nombre='$this->nombre',
+            nombre='$this->nombre'
             WHERE idestado=?";
         $affected = DB::update($sql, [$this->idestado]);
     }

@@ -62,7 +62,7 @@ class Producto extends Model
             cantidad='$this->cantidad',
             precio='$this->precio',
             imagen='$this->imagen',
-            fk_idcategoria='$this->fk_idcategoria',
+            fk_idcategoria='$this->fk_idcategoria'
             WHERE idproducto=?";
             $affected = DB::update($sql, [$this->idproducto]);
       }
@@ -77,10 +77,10 @@ class Producto extends Model
       public function insertar()
       {
             $sql = "INSERT INTO productos (
-                  nombre
-                  cantidad
-                  precio
-                  imagen
+                  nombre,
+                  cantidad,
+                  precio,
+                  imagen,
                   fk_idcategoria
             ) VALUES (?, ?, ?, ?, ?);";
             $result = DB::insert($sql, [

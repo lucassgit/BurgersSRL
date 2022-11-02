@@ -60,7 +60,7 @@ class Postulaciones extends Model
             apellido='$this->apellido',
             celular='$this->celular',
             correo='$this->correo',
-            curriculum='$this->curriculum',
+            curriculum='$this->curriculum'
             WHERE idpostulacion=?";
         $affected = DB::update($sql, [$this->idpostulacion]);
     }
